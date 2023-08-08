@@ -65,3 +65,9 @@ Cypress.Commands.add('signInToOnliner', (login, password) => {
     cy.clickSubmitButton();
 })
 
+Cypress.Commands.add('checkErrorMessageAppears', () => {
+    cy.get("div[class^='auth-form__description auth-form__description_error']").should("be.visible");
+})
+
+
+

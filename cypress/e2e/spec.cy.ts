@@ -5,7 +5,7 @@ describe('Onliner tests', () => {
   const incorrectLogin = "klepatskafvcfgvgvgyanastia@gmail.com";
   const incorrectPassword = "nastushbhbha1213";
 
-  it('Open Catalog', () => {
+  it('Check user can open Catalog', () => {
     cy.openOnliner();
     cy.get('span[class="b-main-navigation__text"]').first().click();
     cy.get('ul[class="catalog-navigation-classifier "]').should("be.visible");
@@ -21,7 +21,7 @@ describe('Onliner tests', () => {
   it('Check correct message appears upon inputting not correct credentioals', () => {
     cy.openOnliner();
     cy.signInToOnliner(incorrectLogin, incorrectPassword);
-    cy.get("div[class^='auth-form__description auth-form__description_error']").should("be.visible");
+    cy.checkErrorMessageAppears();
   })
 
   it('Check correct message appears if user did not provide password', () => {
@@ -29,7 +29,7 @@ describe('Onliner tests', () => {
     cy.clickSignInButton();
     cy.inputEmail(login);
     cy.clickSubmitButton();
-    cy.get("div[class^='auth-form__description auth-form__description_error']").should("be.visible");
+    cy.checkErrorMessageAppears();
   })
 
   it('Check user can send forgot password form', () => {
@@ -39,7 +39,6 @@ describe('Onliner tests', () => {
     cy.get("input[placeholder='Ник, e-mail или номер телефона']").type(login);
     cy.clickSubmitButton();
     cy.get("form[novalidate]").should("not.be.visible");
-
   })
 
 
